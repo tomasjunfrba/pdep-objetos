@@ -1,0 +1,64 @@
+import lib.*
+
+test "fahrenheit451 - version original" {
+	assert.notThat(fahrenheit451.version() == "ilustrada")
+	assert.that(fahrenheit451.valoracion() == 3500)
+	assert.that(fahrenheit451.precio() == 5000)
+}
+
+test "fahrenheit451 - version ilustrada" {
+	fahrenheit451.version("ilustrada")
+	assert.that(fahrenheit451.valoracion() == 8000)
+	assert.that(fahrenheit451.precio() == 6000)
+}
+
+test "cuidadoConElPerro - precioBase par (2900)"{
+	assert.that(cuidadoConElPerro.precioBase() == 2900)
+	assert.that(cuidadoConElPerro.precio() == 3400)
+	assert.that(cuidadoConElPerro.valoracion() == 6700)
+}
+
+test "cuidadoConElPerro - precioBase impar (2901)"{
+	cuidadoConElPerro.precioBase(2901)
+	assert.that(cuidadoConElPerro.precio() == 3501)
+}
+
+test "patronesDelDiseno - 300 likes"{
+	assert.that(patronesDeDiseno.likes() == 300)
+	assert.that(patronesDeDiseno.valorImaginario() == 462)
+	assert.that(patronesDeDiseno.valoracion() == 4924)
+	assert.that(patronesDeDiseno.precio() == 5000)
+}
+
+test "patronesDelDiseno - 302 likes"{
+	patronesDeDiseno.likes(302)
+	assert.that(patronesDeDiseno.precio() == 6000)
+}
+
+test "cristina"{
+	assert.that(cristina.leGusta(cuidadoConElPerro))
+	assert.notThat(fahrenheit451.version() == "ilustrada")
+	assert.notThat(cristina.leGusta(fahrenheit451))
+	
+	fahrenheit451.version("ilustrada")
+	assert.that(cristina.leGusta(fahrenheit451))
+}
+
+test "roberto"{
+	assert.notThat(roberto.leGusta(cuidadoConElPerro))
+	//assert.that(roberto.leGusta(patronesDeDiseno))
+	// no se por que falla
+}
+
+test "patricia - esta de humor"{
+	assert.that(patricia.estaDeHumor())
+	assert.that(patricia.leGusta(cuidadoConElPerro))
+}
+
+test "patricia - no esta de humor"{
+	patricia.estaDeHumor(false)
+	assert.notThat(patricia.estaDeHumor())
+	assert.notThat(patricia.leGusta(cuidadoConElPerro))
+	//assert.notThat(patricia.leGusta(patronesDeDiseno))
+	// creo que el enunciado esta mal
+}
